@@ -2,13 +2,13 @@ export default function InvoiceResume({items, cashier, customer, invoiceNumber, 
 
     return(
             <div>
-                <h2 className="text-center mb-6">INVOICE</h2>
+                <h2 className="text-center mb-6 font-bold">INVOICE</h2>
 
                 <div className="flex flex-row w-full pb-4">
                     <div className="gap-3 flex flex-col w-1/2">
-                        <label>Invoice Number :</label>
-                        <label>Cashier :</label>
-                        <label>Customer :</label>
+                        <label className="font-bold">Invoice Number :</label>
+                        <label className="font-bold">Cashier :</label>
+                        <label className="font-bold">Customer :</label>
                     </div>
 
                     <div className="gap-3 flex flex-col w-1/2">
@@ -40,22 +40,22 @@ export default function InvoiceResume({items, cashier, customer, invoiceNumber, 
 
                     <div className="flex flex-col gap-3 w-1/5 text-center">
                         {items && items.map((item)=>{
-                                return <div> {item.price} </div>
+                                return <div> ${item.price} </div>
                         })}
                     </div>
 
                     <div className="flex flex-col gap-3 w-1/5 text-center">
                         {items && items.map((item)=>{
-                                return <div> {item.price * item.qty} </div>
+                                return <div> ${item.price * item.qty} </div>
                         })}
                     </div>
                 </div>
 
                 <div className="flex flex-row w-full justify-between border-y-2 py-4">
                     <div className="gap-3 flex flex-col">
-                        <label>SubTotal :</label>
-                        <label>Discount :</label>
-                        <label>Tax :</label>
+                        <label className="font-bold">SubTotal :</label>
+                        <label className="font-bold">Discount :</label>
+                        <label className="font-bold">Tax :</label>
                     </div>
 
                     <div className="gap-3 flex flex-col">
@@ -66,8 +66,8 @@ export default function InvoiceResume({items, cashier, customer, invoiceNumber, 
                 </div>
 
                 <div className="flex flex-row justify-between pb-16 pt-4">
-                    <label>Total :</label>
-                    <label>${parseFloat(total).toFixed(2)}</label>
+                    <label className="font-bold">Total :</label>
+                    <label className="font-bold">${parseFloat(total).toFixed(2)}</label>
                 </div>
             </div>
         

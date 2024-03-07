@@ -34,4 +34,3 @@ export default function ModalInvoice({nextHandler, downloadHandler, items, cashi
 
 
 
-

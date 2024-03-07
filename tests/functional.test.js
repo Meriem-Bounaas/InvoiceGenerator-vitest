@@ -8,7 +8,7 @@ describe('invoice form', () => {
     it('current date div should contain current date ', () => {
         render(<InvoiceForm/>)
 
-        const currentDateElement = screen.getByText(/Current Date :/i);
+        const currentDateElement = screen.getByLabelText(/Current Date :/i);
         const currentDate = ()=>{
             const getDate = new Date()
             const year = getDate.getFullYear()

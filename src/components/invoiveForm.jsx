@@ -10,10 +10,10 @@ export default function InvoiceForm(){
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [invoiceNumber, setInvoiceNumber] = useState(1)
-    const [cashier, setCashier] = useState()
-    const [customer, setcustomer] = useState()
-    const [discountRate, setDiscountRat] = useState(0)
-    const [taxRate, setTaxRat] = useState(0)
+    const [cashier, setCashier] = useState('')
+    const [customer, setCustomer] = useState('')
+    const [discountRate, setDiscountRate] = useState(0)
+    const [taxRate, setTaxRate] = useState(0)
     const [items, setItems] = useState([
         {
             id: uid(6),
@@ -22,6 +22,9 @@ export default function InvoiceForm(){
             price: '1.00',
           },
     ])
+    const [isCustomerEmpty, setIsCustomerEmpty] = useState(false);
+    const [isCashierEmpty, setIsCashierEmpty] = useState(false);
+    const [isReviewClicked , setIsReviewClicked ] = useState(false);
 
     const date = ()=>{
         const getDate = new Date()
@@ -49,20 +52,31 @@ export default function InvoiceForm(){
             qty: 1,
             price: '1.00',
           }])
+          setIsReviewClicked(false)
       }
-      const namesNotVide = () => {
-          const newTab = items.filter((item)=>{ return item.name.length <= 0})
-          return (newTab.length > 0)?  false : true
-        //   compact solution : return !(newTab.length > 0)
-      }
+
+        const isNameEmpty = () => {
+            return items.some(item => item.name.trim() === '');
+        };
+
       const ReviewHandler = () => {
-        if(cashier && customer && items.length > 0 && namesNotVide()){ 
-            setIsModalOpen(true);
+        if(cashier.trim() === ''){
+            setIsCashierEmpty(true);
         }
+        if(customer.trim() === ''){
+            setIsCustomerEmpty(true);
+        }
+        
+        if(cashier && customer && !isNameEmpty()){ 
+            setIsModalOpen(true);
+            
+        }
+        setIsReviewClicked(true)
       }
+
       const clearAll = () => {   
-        setDiscountRat(0)
-        setTaxRat(0)
+        setDiscountRate(0)
+        setTaxRate(0)
         setItems([])
        }
 
@@ -87,35 +101,44 @@ export default function InvoiceForm(){
     }
 
     return(
-        <div className="flex flex-row px-28 w-full bg-gray-500">
+        <div className="flex flex-col lg:flex-row px-28 w-full bg-gray-500">
             {/* first column */}
-            <div className="flex flex-col p-6 bg-white rounded-xl w-3/4 self-center">
+            <div className="flex flex-col lg:p-6 bg-white rounded-xl lg:w-3/4 p-4 self-center">
                 {/* header invoice */}
-                <div className="text-xl flex flex-row justify-between mb-6">
+                <div className="text-xl flex flex-col lg:flex-row justify-between mb-6">
                     <div className="flex flex-row gap-3">
-                        <label>Current Date :</label>
+                        <div className='font-semibold'>Current Date : </div>
                         <div>{date()}</div>
                     </div>
-                    <div className="flex flex-row gap-3">
-                        <label>Invoice Number : </label>
+                    <div className="flex flex-row gap-3 pt-4 lg:pt-0">
+                        <div className='font-semibold'>Invoice Number : </div>
                         <input type="number" value={invoiceNumber} onChange={(e)=>{setInvoiceNumber(e.target.value)}} className="text-sm bg-slate-200 rounded-md outline-none pl-3 w-32 p-2"/>
                     </div>
                 </div>
 
-                <div className="self-center text-xl py-3 border-t-2 w-full text-center "> Invoice </div>
+                <div className="self-center text-xl py-3 border-t-2 w-full text-center font-bold "> Invoice </div>
 
                 {/* cashier and customer name */}
-                <div className="text-xl flex flex-row pt-2 w-full gap-12">
+                <div className="text-xl flex flex-col lg:flex-row pt-2 w-full lg:gap-12 gap-4">
                     <div className="flex flex-col gap-3 w-full">
-                        <label> Cashier : </label>
-                        <input className="bg-slate-200 p-1 rounded-md outline-none" type="text" name='cashier' value={cashier} 
-                        onChange={(e)=>{setCashier(e.target.value)}} 
+                        <label className='font-semibold'> Cashier : </label>
+                        <input className={`bg-slate-200 p-1 rounded-md outline-none ${isCashierEmpty ? 'border border-red-500' : ''}`} type="text" name='cashier' value={cashier} 
+                        onChange={(e)=>{setCashier(e.target.value); setIsCashierEmpty(false)}} 
                         placeholder="Cashier name" 
-                        required/>
+                        required
+                        />
+                        {isCashierEmpty && 
+                            <p className='text-red-600 text-sm pl-2'>Cashier name cannot be empty</p>
+                        }
                     </div>
                     <div className="flex flex-col gap-3 w-full">
-                        <label> Customer : </label>
-                        <input className="bg-slate-200 p-1 rounded-md outline-none" type="text" name='customer' value={customer} onChange={(e)=>{setcustomer(e.target.value)}} placeholder="Customer name" required/>
+                        <label className='font-semibold'> Customer : </label>
+                        <input className={`bg-slate-200 p-1 rounded-md outline-none ${isCustomerEmpty ? 'border border-red-500' : ''}`} type="text" name='customer' value={customer} 
+                            onChange={(e)=>{setCustomer(e.target.value); setIsCustomerEmpty(false)}} 
+                            placeholder="Customer name" 
+                            required
+                        />
+                        {isCustomerEmpty && <p className='text-red-600 text-sm pl-2'>Customer name cannot be empty</p>}
                     </div>
                 </div>
 
@@ -140,6 +163,7 @@ export default function InvoiceForm(){
                                 price = {item.price}
                                 items = {items}
                                 setItems = {setItems}
+                                isReviewClicked  = {isReviewClicked }
                                 />
                             )
                         })}
@@ -153,33 +177,32 @@ export default function InvoiceForm(){
                 />
 
                 {/* footer invoice */}
-                <div className="w-1/2 self-end">
+                <div className="w-full lg:w-1/2 self-end pt-5 lg:pt-0">
                     <div className="flex flex-row justify-between">
-                        <div>Subtotal : </div>
+                        <div className='font-semibold'>Subtotal : </div>
                         <div> ${subtotal.toFixed(2)}</div>
                     </div>
 
                     <div className="flex flex-row justify-between">
-                        <div>Discount : </div>
+                        <div className='font-semibold'>Discount : </div>
                         <div>({discountRate}%)${discount.toFixed(2)}</div>
                     </div>
 
                     <div className="flex flex-row justify-between">
-                        <div>Tax : </div>
+                        <div className='font-semibold'>Tax : </div>
                         <div>({taxRate}%)${tax.toFixed(2)}</div>
                     </div>
 
-                    <hr  className="border-2 h-1 my-4"/>
 
-                    <div className="flex flex-row justify-between">
-                        <div>Total : </div>
+                    <div className="flex flex-row justify-between border-t-2 py-3">
+                        <div className='font-semibold'>Total : </div>
                         <div>${total.toFixed(2)}</div>
                     </div>
                 </div>
             </div>
 
             {/* second coloumn */}
-            <div className="flex flex-col h-1/2 pl-5 w-1/4">
+            <div className="flex flex-col h-1/2 lg:pl-5 lg:w-1/4 self-center lg:self-start pt-8 lg:pt-0">
 
                 <Button 
                     txt={'Review Invoice'}
@@ -189,12 +212,12 @@ export default function InvoiceForm(){
                 <div className="my-6 border-t-2 text-white gap-1 flex flex-col">
                     <label className="text-white text-lg mt-2">Tax rate :</label>
                     <div className="flex flex-row self-center w-full h-9 rounded-lg">
-                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setTaxRat(e.target.value)}}/>
+                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setTaxRate(e.target.value)}}/>
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
                     </div>
                     <label className="text-white text-lg mt-3 mb-2">Discount rate :</label>
                     <div className="flex flex-row self-center w-full h-9">
-                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setDiscountRat(e.target.value)}}/>
+                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setDiscountRate(e.target.value)}}/>
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
                     </div>
                 </div>
