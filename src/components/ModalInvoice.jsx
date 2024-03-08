@@ -1,7 +1,7 @@
 import { useEffect } from "react";
  import InvoiceResume from "./invoiceResume";
  
-export default function ModalInvoice({nextHandler, downloadHandler, items, cashier, customer, invoiceNumber, setInvoiceNumber, subTotal, discount, tax, total, setIsModalOpen}){
+export default function ModalInvoice({nextHandler, downloadHandler, items, cashier, customer, invoiceNumber, subTotal, discount, tax, total, setIsModalOpen}){
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -18,7 +18,7 @@ export default function ModalInvoice({nextHandler, downloadHandler, items, cashi
     
     return(
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-4 w-1/3 rounded-lg flex flex-col justify-between">
+            <div className="bg-white p-4 w-full mx-5 lg:mx-0 lg:w-1/3 rounded-lg flex flex-col justify-between">
                 <div id="invoice-resume">
                     <InvoiceResume items={items} cashier={cashier} customer={customer} invoiceNumber={invoiceNumber} subTotal={subTotal} discount={discount} tax={tax} total={total} />
                 </div>

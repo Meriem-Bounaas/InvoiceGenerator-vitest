@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'; 
 
 export default function ItemRow({ id, name, qty, price, items, setItems, isReviewClicked }) {
     const [isNameEmpty, setIsNameEmpty] = useState(name.trim() === '');
 
-    // Vérifier si le nom est vide à chaque modification de name, qty ou price
     useEffect(() => {
         setIsNameEmpty(name.trim() === '');
     }, [name, qty, price]);
@@ -30,7 +32,7 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
     return (
         <>
             <tr>
-                <td id={id} className="w-full">
+                <td id={id} className="w-full md:w-2/3 lg:w-3/4">
                     <input
                         className={`bg-slate-200 w-full p-2 rounded-lg outline-none ${
                             isNameEmpty && isReviewClicked ? 'border border-red-500' : ''}`}
@@ -43,22 +45,22 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
                     />
                 </td>
                 <td id={id}>
-                    <input
-                        className="bg-slate-200 text-start p-2 rounded-lg outline-none"
-                        type="number"
-                        min={1}
-                        max={100}
-                        step={1}
-                        name="qty"
-                        value={qty}
-                        onChange={event => editItemHandler(event, id)}
-                    />
-                </td>
-                <td id={id}>
+                     <input
+                         className="bg-slate-200 text-start p-2 rounded-lg outline-none"
+                         type="number"
+                         min={1}
+                         max={100}
+                         step={1}
+                         name="qty"
+                         value={qty}
+                         onChange={event => editItemHandler(event, id)}
+                     />
+                 </td>
+                <td id={id} className="w-1/6">
                     <div className="relative">
-                        <i className="absolute left-3 top-1/2 transform -translate-y-1/2 fa-thin fa-dollar-sign"></i>
+                        <FontAwesomeIcon icon={faDollarSign} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                         <input
-                            className="bg-slate-200 text-end flex-grow p-2 rounded-lg outline-none"
+                            className="bg-slate-200 text-end p-2 rounded-lg outline-none"
                             type="number"
                             name="price"
                             min={0}
@@ -68,10 +70,12 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
                         />
                     </div>
                 </td>
-                <td className="flex items-center justify-center">
-                    <button onClick={deleteItemHandler}>
-                        <i className="fa-regular fa-trash-can text-xl md:text-2xl cursor-pointer text-gray-500"></i>
-                    </button>
+                <td className="h-full">
+                    <div className='flex items-center justify-center h-full'>
+                        <button onClick={deleteItemHandler}>
+                            <FontAwesomeIcon icon={faTrashAlt} className="text-xl md:text-2xl cursor-pointer text-gray-500" />
+                        </button>
+                    </div>
                 </td>
             </tr>
             {isNameEmpty && isReviewClicked && (

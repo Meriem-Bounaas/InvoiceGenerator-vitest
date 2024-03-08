@@ -101,9 +101,9 @@ export default function InvoiceForm(){
     }
 
     return(
-        <div className="flex flex-col lg:flex-row px-28 w-full bg-gray-500">
+        <div className="flex flex-col lg:flex-row lg:px-28 w-full bg-gray-500">
             {/* first column */}
-            <div className="flex flex-col lg:p-6 bg-white rounded-xl lg:w-3/4 p-4 self-center">
+            <div className="flex flex-col lg:p-6 bg-white rounded-xl w-full lg:w-3/4 lg:mx-0 mx-4 p-4 self-center">
                 {/* header invoice */}
                 <div className="text-xl flex flex-col lg:flex-row justify-between mb-6">
                     <div className="flex flex-row gap-3">
@@ -202,7 +202,7 @@ export default function InvoiceForm(){
             </div>
 
             {/* second coloumn */}
-            <div className="flex flex-col h-1/2 lg:pl-5 lg:w-1/4 self-center lg:self-start pt-8 lg:pt-0">
+            <div className="flex flex-col h-1/2 lg:pl-5 w-full px-7 lg:px-0 lg:w-1/4 self-center lg:self-start pt-8 lg:pt-0">
 
                 <Button 
                     txt={'Review Invoice'}
@@ -212,12 +212,12 @@ export default function InvoiceForm(){
                 <div className="my-6 border-t-2 text-white gap-1 flex flex-col">
                     <label className="text-white text-lg mt-2">Tax rate :</label>
                     <div className="flex flex-row self-center w-full h-9 rounded-lg">
-                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setTaxRate(e.target.value)}}/>
+                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" value={taxRate} onChange={(e)=>{setTaxRate(e.target.value)}}/>
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
                     </div>
                     <label className="text-white text-lg mt-3 mb-2">Discount rate :</label>
                     <div className="flex flex-row self-center w-full h-9">
-                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" onChange={(e)=>{setDiscountRate(e.target.value)}}/>
+                        <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" value={discountRate} onChange={(e)=>{setDiscountRate(e.target.value)}}/>
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
                     </div>
                 </div>
