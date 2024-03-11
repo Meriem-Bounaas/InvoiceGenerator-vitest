@@ -101,18 +101,20 @@ export default function InvoiceForm(){
     }
 
     return(
-        <div className="flex flex-col lg:flex-row lg:px-28 w-full bg-gray-500">
-            {/* first column */}
-            <div className="flex flex-col lg:p-6 bg-white rounded-xl w-full lg:w-3/4 lg:mx-0 mx-4 p-4 self-center">
+        <div className="flex flex-col lg:flex-row lg:px-28 w-full bg-gray-500 items-center">
+            <div className='flex lg:flex-row flex-col lg:w-full w-3/4'>
+                {/* first column */}
+                <div className="flex flex-col lg:p-6 w-full bg-white rounded-xl mx-4 lg:w-3/4 lg:mx-0 p-4 self-center">
+                
                 {/* header invoice */}
                 <div className="text-xl flex flex-col lg:flex-row justify-between mb-6">
                     <div className="flex flex-row gap-3">
-                        <div className='font-semibold'>Current Date : </div>
-                        <div>{date()}</div>
+                        <div className='font-semibold text-base md:text-xl self-end'>Current Date : </div>
+                        <div className='self-end'>{date()}</div>
                     </div>
                     <div className="flex flex-row gap-3 pt-4 lg:pt-0">
-                        <div className='font-semibold'>Invoice Number : </div>
-                        <input type="number" value={invoiceNumber} onChange={(e)=>{setInvoiceNumber(e.target.value)}} className="text-sm bg-slate-200 rounded-md outline-none pl-3 w-32 p-2"/>
+                        <div className='font-semibold text-base md:text-xl self-end'>Invoice Number : </div>
+                        <input type="number" value={invoiceNumber} onChange={(e)=>{setInvoiceNumber(e.target.value)}} className="text-sm bg-slate-200 rounded-md outline-none pl-3 w-32 p-2 self-end"/>
                     </div>
                 </div>
 
@@ -145,11 +147,11 @@ export default function InvoiceForm(){
                 {/* table invoice */}
                 <table className="mt-10 w-full text-left">
                     <thead>
-                        <tr className="text-sm">
-                            <th className="">Item</th>
-                            <th className="">Qty</th>
-                            <th className="text-center">Price</th>
-                            <th className="text-center">Action</th>
+                        <tr className="text-sm border-b border-gray-300 ">
+                            <th className="pb-2">Item</th>
+                            <th className="pb-2">Qty</th>
+                            <th className="text-center pb-2">Price</th>
+                            <th className="text-center pb-2">Action</th>
                         </tr>
                     </thead>
                     <tbody className='gap-8'> 
@@ -202,7 +204,7 @@ export default function InvoiceForm(){
             </div>
 
             {/* second coloumn */}
-            <div className="flex flex-col h-1/2 lg:pl-5 w-full px-7 lg:px-0 lg:w-1/4 self-center lg:self-start pt-8 lg:pt-0">
+            <div className="flex flex-col h-1/2 lg:pl-5 lg:px-0 lg:w-1/4 w-full self-center lg:self-start pt-8 lg:pt-0">
 
                 <Button 
                     txt={'Review Invoice'}
@@ -221,6 +223,8 @@ export default function InvoiceForm(){
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
                     </div>
                 </div>
+
+            </div>
 
             </div>
 
