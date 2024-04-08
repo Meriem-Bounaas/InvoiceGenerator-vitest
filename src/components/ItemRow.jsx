@@ -4,10 +4,10 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons'; 
 
 export default function ItemRow({ id, name, qty, price, items, setItems, isReviewClicked }) {
-    const [isNameEmpty, setIsNameEmpty] = useState(name.trim() === '');
+    const [isNameEmpty, setIsNameEmpty] = useState(!name || name.trim() === '');
 
     useEffect(() => {
-        setIsNameEmpty(name.trim() === '');
+        setIsNameEmpty(!name || name.trim() === '');
     }, [name, qty, price]);
 
     const deleteItemHandler = () => {
@@ -86,4 +86,3 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
         </>
     );
 }
-

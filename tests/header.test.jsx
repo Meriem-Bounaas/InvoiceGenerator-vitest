@@ -1,6 +1,6 @@
 import { it, expect, describe } from 'vitest'
 import {render, screen} from '@testing-library/react'
-import Header from '../../src/components/header'
+import Header from '../src/components/header'
 import '@testing-library/jest-dom/vitest'
 
 describe('header', () => {
@@ -12,4 +12,3 @@ describe('header', () => {
         expect(heading).toHaveTextContent(/Invoice Generator/i)
     })
 })
-

@@ -102,19 +102,19 @@ export default function InvoiceForm(){
 
     return(
         <div className="flex flex-col lg:flex-row lg:px-28 w-full bg-gray-500 items-center">
-            <div className='flex lg:flex-row flex-col lg:w-full w-3/4'>
+            <div className='flex w-full lg:flex-row flex-col px-2 lg:px-0'>
                 {/* first column */}
                 <div className="flex flex-col lg:p-6 w-full bg-white rounded-xl mx-4 lg:w-3/4 lg:mx-0 p-4 self-center">
                 
                 {/* header invoice */}
                 <div className="text-xl flex flex-col lg:flex-row justify-between mb-6">
                     <div className="flex flex-row gap-3">
-                        <div className='font-semibold text-base md:text-xl self-end'>Current Date : </div>
-                        <div className='self-end'>{date()}</div>
+                        <label className='font-semibold text-base md:text-xl self-end'>Current Date :</label>
+                        <div data-testid='current-date' className='self-end'>{date()}</div>
                     </div>
                     <div className="flex flex-row gap-3 pt-4 lg:pt-0">
                         <div className='font-semibold text-base md:text-xl self-end'>Invoice Number : </div>
-                        <input type="number" value={invoiceNumber} onChange={(e)=>{setInvoiceNumber(e.target.value)}} className="text-sm bg-slate-200 rounded-md outline-none pl-3 w-32 p-2 self-end"/>
+                        <input type="number" value={invoiceNumber} onChange={(e)=>{setInvoiceNumber(e.target.value)}} className="text-sm bg-slate-200 rounded-md outline-none pl-3 lg:w-32 p-2 self-end"/>
                     </div>
                 </div>
 
@@ -182,7 +182,7 @@ export default function InvoiceForm(){
                 <div className="w-full lg:w-1/2 self-end pt-5 lg:pt-0">
                     <div className="flex flex-row justify-between">
                         <div className='font-semibold'>Subtotal : </div>
-                        <div> ${subtotal.toFixed(2)}</div>
+                        <div data-testid='subtotal'>${subtotal.toFixed(2)}</div>
                     </div>
 
                     <div className="flex flex-row justify-between">
