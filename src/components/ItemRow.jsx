@@ -32,7 +32,7 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
     return (
         <>
             <tr>
-                <td id={id} className="min-w-2/5">
+                <td id={id} className="w-3/5">
                     <input
                         className={`bg-slate-200 w-full p-2 rounded-lg outline-none ${
                             isNameEmpty && isReviewClicked ? 'border border-red-500' : ''}`}
@@ -70,7 +70,7 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
                         />
                     </div>
                 </td>
-                <td className="h-full">
+                <td className="h-full min-w-1/5">
                     <div className='flex items-center justify-center h-full'>
                         <button onClick={deleteItemHandler}>
                             <FontAwesomeIcon icon={faTrashAlt} className="text-xl md:text-2xl cursor-pointer text-gray-500" />
