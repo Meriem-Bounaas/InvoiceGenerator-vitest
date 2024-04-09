@@ -32,7 +32,7 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
     return (
         <>
             <tr>
-                <td id={id} className="md:w-2/3 lg:w-3/4">
+                <td id={id} className="min-w-2/5">
                     <input
                         className={`bg-slate-200 w-full p-2 rounded-lg outline-none ${
                             isNameEmpty && isReviewClicked ? 'border border-red-500' : ''}`}
@@ -44,9 +44,9 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
                         required
                     />
                 </td>
-                <td id={id} className='min-w-[65px] md:min-w-[80px]'>
+                <td id={id} className='min-w-1/5'>
                      <input
-                         className="bg-slate-200 text-start p-2 rounded-lg outline-none"
+                         className="bg-slate-200 w-full text-start p-2 rounded-lg outline-none"
                          type="number"
                          min={1}
                          max={100}
@@ -56,11 +56,11 @@ export default function ItemRow({ id, name, qty, price, items, setItems, isRevie
                          onChange={event => editItemHandler(event, id)}
                      />
                  </td>
-                <td id={id} className="min-w-[100px] md:min-w-[150px]">
+                <td id={id} className="min-w-1/5">
                     <div className="relative">
                         <FontAwesomeIcon icon={faDollarSign} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
                         <input
-                            className="bg-slate-200 text-end p-2 rounded-lg outline-none"
+                            className="bg-slate-200 w-full text-end p-2 rounded-lg outline-none"
                             type="number"
                             name="price"
                             min={0}

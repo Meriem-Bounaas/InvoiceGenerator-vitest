@@ -12,10 +12,10 @@ describe('invoice form', () => {
         render(<InvoiceForm />)
 
         const currentDateReceived = screen.getByTestId('current-date');
-        const date = currentDateExpected()
+        const dateExpected = currentDateExpected()
 
         expect(currentDateReceived).toBeInTheDocument()
-        expect(currentDateReceived.textContent).toEqual(date)
+        expect(currentDateReceived.textContent).toEqual(dateExpected)
     })
 
     it('When I enter an item name in the input, the subtotal and total div should changes', () => {
@@ -42,30 +42,30 @@ describe('invoice form', () => {
         expect(subtotal.textContent).toEqual('$'+ priceItems.toFixed(2))
     })
 
-    it('When I click on the Add Item button, a new item row should appear', () => {
+    // it('When I click on the Add Item button, a new item row should appear', () => {
         
-    })
+    // })
     
 
-    it('When I click on delete button, the item row should disappear', () => {
+    // it('When I click on delete button, the item row should disappear', () => {
         
-    })
+    // })
 
-    it('When I enter tax rate in the input, the Tax should change in div', () => {
+    // it('When I enter tax rate in the input, the Tax should change in div', () => {
         
-    })
+    // })
 
 
 
-    it('When I click on the Review Invoice button and if cashier and customer and at least one item name existe, the modal invoice should appear.', () => {
+    // it('When I click on the Review Invoice button and if cashier and customer and at least one item name existe, the modal invoice should appear.', () => {
         
-    })
+    // })
 
 
 
-    it('When I click on the Review Invoice button and if at least cashier or customer or nothing item name existe, the modal invoice d\'ont should appear.', () => {
+    // it('When I click on the Review Invoice button and if at least cashier or customer or nothing item name existe, the modal invoice d\'ont should appear.', () => {
         
-    })
+    // })
 
 
 })

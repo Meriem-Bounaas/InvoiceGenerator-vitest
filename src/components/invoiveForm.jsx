@@ -212,7 +212,7 @@ export default function InvoiceForm(){
                 />
 
                 <div className="my-6 border-t-2 text-white gap-1 flex flex-col">
-                    <label className="text-white text-lg mt-2">Tax rate :</label>
+                    <label className="text-white text-lg mt-2 mb-2">Tax rate :</label>
                     <div className="flex flex-row self-center w-full h-9 rounded-lg">
                         <input type="number" step="0.01" placeholder="0.0" className="w-3/4 p-2 rounded-l-md text-black outline-none" value={taxRate} onChange={(e)=>{setTaxRate(e.target.value)}}/>
                         <div className="bg-gray-300 w-1/4 text-center font-bold text-gray-500 rounded-r-md">%</div>
